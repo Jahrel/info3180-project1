@@ -5,7 +5,7 @@ Werkzeug Documentation:  http://werkzeug.pocoo.org/documentation/
 This file creates your application.
 """
 import os
-from app import app
+from app import app , models
 from flask import render_template, request, redirect, url_for, flash
 from werkzeug.utils import secure_filename
 
@@ -49,7 +49,7 @@ def propertyy():
         filename = secure_filename(photo.filename)
 
         photo.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-        property_info = PropertyInfo(title, number_of_bedrooms, number_of_bathrooms, location, price, typeHA, description, photo)
+        property_info = PropertyInfo(title, number_of_bedrooms, number_of_bathrooms, location, price, typeHA, description, filename)
         
         db.session.add(property_info)
         db.session.commit()
@@ -64,10 +64,11 @@ def properties():
     if request.method == 'GET':
         return render_template('properties.html', properties = properties)
 
-@app.route('/property/<propertyid>')
+@app.route('/property/<propertyid>', methods = ['GET'])
 def propertyid(propertyid):
-    property_id = PropertyInfo.query.get(propertyid)
-    return render_template('property.html', property = property_id)
+    proprecord = PropertyInfo.query.filter_by(id = propertyid).first()
+    if request.method == 'GET':
+        return render_template('propertyid.html', properties = proprecord)
 
 @app.route('/upload/<filename>')
 def get_image(filename):

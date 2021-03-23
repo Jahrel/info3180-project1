@@ -5,19 +5,19 @@
 <div class="property-card">
 
     <div>
-        <img class="single" src="{{ url_for('static', filename=" uploads + property.photo }} />
+        <img class="single" src="{{ url_for('get_image', filename = properties.photo)}} "/>
     </div>
     <div class="single-card-body">
-        <h2>{{ property.title }}</h2>
+        <h2>{{ properties.title }}</h2>
         <div class="attributes">
-            <span class="attribute price">${{ property.price }}</span> <span class="attribute type">{{ property.typeHA}}</span>
+            <span class="attribute price">${{ properties.price }}</span> <span class="attribute type">{{ properties.typeHA}}</span>
         </div>
-        <p>{{ property.description }}</p>
+        <p>{{ properties.description }}</p>
         <div class="add-tab">
-            <p><i class="fa fa-bed"></i> {{ property.number_of_bedrooms }} Bedrooms</p>  
-            <p><i class="fa fa-shower"></i> {{ property.number_of_bathrooms}} Bathrooms</p>
+            <p><i class="fa fa-bed"></i> {{ properties.number_of_bedrooms }} Bedrooms</p>  
+            <p><i class="fa fa-shower"></i> {{ properties.number_of_bathrooms}} Bathrooms</p>
         </div>
-        <p><i class="fa fa-map-marker" aria-hidden="true"></i> {{ property.location }}</p>
+        <p><i class="fa fa-map-marker" aria-hidden="true"></i> {{ properties.location }}</p>
 
         <button type="submit" class="btn email-btn">Email</button>
     </div>
